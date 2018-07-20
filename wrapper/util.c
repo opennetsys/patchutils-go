@@ -35,18 +35,19 @@
 #include <stdarg.h>
 #include <string.h>
 #include <limits.h>
-#ifdef HAVE_UNISTD_H
+//#ifdef HAVE_UNISTD_H
 # include <unistd.h>
-#endif /* HAVE_UNISTD_H */
+//#endif /* HAVE_UNISTD_H */
 #include <errno.h>
-#ifdef HAVE_SYS_TYPES_H
+//#ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h>
-#endif /* HAVE_SYS_TYPES_H */
-#ifdef HAVE_SYS_WAIT_H
+//#endif /* HAVE_SYS_TYPES_H */
+//#ifdef HAVE_SYS_WAIT_H
 # include <sys/wait.h>
-#endif /* HAVE_SYS_WAIT_H */
+//#endif /* HAVE_SYS_WAIT_H */
 
 #include "util.h"
+#include "myerror.h"
 
 /* safe malloc */
 void *xmalloc (size_t size)
@@ -140,7 +141,7 @@ void patlist_add_file(struct patlist **dst, const char *fn)
 	char *line = NULL;
 	size_t linelen = 0;
 	size_t len;
-	
+
 	fd = fopen (fn, "r");
 	if (NULL == fd)
 		return;
@@ -158,7 +159,7 @@ void patlist_add_file(struct patlist **dst, const char *fn)
 			line[len - 1] = '\0';
 		}
 		patlist_add (dst, line);
-	} 
+	}
 	fclose (fd);
 }
 
@@ -243,11 +244,11 @@ FILE *xopen_unzip (const char *name, const char *mode)
 	}
 	if (zprog == NULL)
 		return xopen_seekable (name, mode);
-	
+
 	buffer = xmalloc (buflen);
 	fo = xtmpfile();
 	fi = xpipe(zprog, &pid, "r", zprog, name, NULL);
-	
+
 	while (!feof (fi)) {
 		size_t count = fread (buffer, 1, buflen, fi);
 		if (ferror (fi)) {
@@ -256,17 +257,17 @@ FILE *xopen_unzip (const char *name, const char *mode)
 		}
 		if (count < 1)
 			break;
-		
+
 		fwrite (buffer, count, 1, fo);
 		if (ferror (fo))
 			error (EXIT_FAILURE, errno, "writing temp file");
 
 		any_data = 1;
 	}
-	
+
 	free (buffer);
 	fclose (fi);
-	
+
 	waitpid (pid, &status, 0);
 	if (any_data == 0 && WEXITSTATUS (status) != 0)
 	{
@@ -288,10 +289,10 @@ FILE * xpipe(const char * cmd, pid_t *pid, const char *mode, ...)
 	int nargs = 0;
 	char *argv[128], *arg;
 	FILE *res;
-	
+
 	if (!mode || (*mode != 'r' && *mode != 'w'))
 		error (EXIT_FAILURE, 0, "xpipe: bad mode: %s", mode);
-	
+
 	va_start(ap, mode);
 	do {
 		arg = va_arg(ap, char *);
@@ -300,7 +301,7 @@ FILE * xpipe(const char * cmd, pid_t *pid, const char *mode, ...)
 			error (EXIT_FAILURE, 0, "xpipe: too many args");
 	} while (arg != NULL);
 	va_end(ap);
-	
+
 	fflush (NULL);
 	pipe (fildes);
 	child = fork ();
@@ -328,7 +329,7 @@ FILE * xpipe(const char * cmd, pid_t *pid, const char *mode, ...)
 	}
 	if (pid != NULL)
 		*pid = child;
-	
+
 	if (*mode == 'r') {
 		close (fildes[1]);
 		res = fdopen (fildes[0], "r");
@@ -354,7 +355,7 @@ ssize_t getline(char **line, size_t *n, FILE *f)
 {
 	char *p;
 	size_t len;
-	
+
 	if (*line == NULL || *n < 2) {
 		p = realloc(*line, GLSTEP);
 		if (!p)
@@ -362,11 +363,11 @@ ssize_t getline(char **line, size_t *n, FILE *f)
 		*line = p;
 		*n = GLSTEP;
 	}
-	
+
 	p = fgets(*line, *n, f);
 	if (!p)
 		return -1;
-	
+
 	len = strlen(p);
 	while ((*line)[len - 1] != '\n') {
 		p = realloc(*line, *n + GLSTEP);
@@ -374,7 +375,7 @@ ssize_t getline(char **line, size_t *n, FILE *f)
 			return -1;
 		*line = p;
 		*n += GLSTEP;
-		
+
 		p = fgets(p + len, *n - len, f);
 		if (!p)
 			break;

@@ -3,10 +3,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "myerror.c"
-#include "util.c"
-#include "diff.c"
-#include "interdiff.c"
+#include "myerror.h"
+#include "interdiff.h"
 
 char* combine_diff(char fp1[], char fp2[]) {
   int argc = 3;
@@ -45,3 +43,10 @@ char* combine_diff(char fp1[], char fp2[]) {
   strcpy(ret, filepath);
   return ret;
 }
+
+/*
+int main(int argc, char *argv[]) {
+  printf("ok");
+  return 0;
+}
+*/

@@ -20,9 +20,9 @@
  *
  */
 
-#ifdef HAVE_CONFIG_H
+//#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
+//#endif
 
 #ifdef HAVE_ALLOCA_H
 # include <alloca.h>
@@ -47,8 +47,12 @@
 # include <sys/wait.h>
 #endif /* HAVE_SYS_WAIT_H */
 
+// https://github.com/espressif/esp-idf/issues/224
+#include <sys/unistd.h>
+
 #include "util.h"
 #include "diff.h"
+#include "myerror.h"
 
 #ifndef DIFF
 #define DIFF "diff"
@@ -58,54 +62,8 @@
 #define PATCH "patch"
 #endif
 
-#ifndef VERSION
-#define VERSION "0.3.4"
-#endif
-
-/* This can be invoked as interdiff, combinediff, or flipdiff. */
-static enum {
-	mode_inter,
-	mode_combine,
-	mode_flip,
-} mode;
-static int flipdiff_inplace = 0;
-
-struct file_list {
-	char *file;
-	long pos;
-	struct file_list *next;
-	struct file_list *tail;
-};
-
-struct lines {
-	char *line;
-	size_t length;
-	unsigned long n;
-	struct lines *next;
-	struct lines *prev;
-};
-
-struct lines_info {
-	char *unline;
-	unsigned long first_offset;
-	unsigned long min_context;
-	struct lines *head;
-	struct lines *tail;
-};
-
-static int human_readable = 1;
-static char diff_opts[4];
-static unsigned int max_context_real = 3, max_context = 3;
-static int context_specified = 0;
-static int ignore_components = 0;
-static int unzip = 0;
-static int no_revert_omitted = 0;
-static int debug = 0;
-
-static struct patlist *pat_drop_context = NULL;
-
-static struct file_list *files_done = NULL;
-static struct file_list *files_in_patch2 = NULL;
+#include "interdiff.h"
+#include "diff.h"
 
 /* checks whether file needs processing and sets context */
 static int
@@ -1329,27 +1287,6 @@ index_patch2 (FILE *p2)
 	else
 		return 1;
 }
-
-/* With flipdiff we have two patches we want to reorder.  The
- * algorithm is:
- *
- * 1. Reconstruct the file as it looks after patch1, using the context
- * from patch2 as well.
- *
- * 2. Apply patch2, in order to reconstruct the file as it looks after
- * both patches have been applied.  Write this out twice.
- *
- * 3. Analyse patch2, taking note of the additions and subtractions it
- * makes.
- *
- * 4. To one of the copies of the reconstructed final image, undo the
- * changes from patch1 by analysing the patch line by line
- * (ourselves!).  Need to take account of offsets due to patch2, and
- * the fact that patch2 may have changed some lines. */
-struct offset {
-	unsigned long line;	/* line number after patch1, before patch2 */
-	long offset;		/* offset modification */
-};
 
 static struct offset *
 add_offset (unsigned long line, long offset,

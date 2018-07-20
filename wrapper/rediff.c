@@ -35,19 +35,23 @@
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for ssize_t
 #endif /* HAVE_SYS_TYPES_H */
-#ifdef HAVE_UNISTD_H
+//#ifdef HAVE_UNISTD_H
 # include <unistd.h> // for access
-#endif /* HAVE_UNISTD_H */
+//#endif /* HAVE_UNISTD_H */
 #ifdef HAVE_SYS_WAIT_H
 # include <sys/wait.h>
 #endif /* HAVE_SYS_WAIT_H */
 
 #include "diff.h"
 #include "util.h"
+#include "myerror.h"
 
 #ifndef DIFF
 #define DIFF "diff"
 #endif /* DIFF */
+
+/* Version number of package */
+#define VERSION "0.3.4"
 
 struct file_info
 {
@@ -57,7 +61,7 @@ struct file_info
 	int info_pending;
 };
 
-struct hunk 
+struct hunk
 {
 	fpos_t filepos;
 	struct file_info *info;
@@ -936,7 +940,7 @@ static int rediff (const char *original, const char *edited, FILE *out)
 			if (getline (&line, &linelen, m) == -1)
 				break;
 		}
-	
+
 		if (feof (m))
 			break;
 
@@ -1031,11 +1035,12 @@ static void syntax (int err)
 	exit (err);
 }
 
+/*
 int main (int argc, char *argv[])
 {
-	/* name to use in error messages */
+	//name to use in error messages
 	set_progname ("rediff");
-	
+
 	while (1) {
 		static struct option long_options[] = {
 	       		{"help", 0, 0, 'h'},
@@ -1046,7 +1051,7 @@ int main (int argc, char *argv[])
 				long_options, NULL);
 		if (c == -1)
 			break;
-		
+
 		switch (c) {
 		case 'v':
 			printf("rediff - patchutils version %s\n", VERSION);
@@ -1057,9 +1062,9 @@ int main (int argc, char *argv[])
 		default:
 			syntax(1);
 		}
-				
+
 	}
-	
+
 	if (argc - optind < 1)
 		syntax (1);
 
@@ -1096,3 +1101,4 @@ int main (int argc, char *argv[])
 
 	return rediff (argv[optind], argv[optind + 1], stdout);
 }
+*/

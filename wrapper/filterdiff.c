@@ -20,13 +20,9 @@
  *
  */
 
-#ifndef VERSION
-#define VERSION "0.3.4"
-#endif
-
-#ifdef HAVE_CONFIG_H
+//#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
+//#endif
 
 #include <errno.h>
 #ifdef HAVE_ERROR_H
@@ -47,6 +43,7 @@
 
 #include "util.h"
 #include "diff.h"
+#include "myerror.h"
 
 struct range {
 	struct range *next;
@@ -1419,6 +1416,7 @@ read_regex_file (const char *file)
 	return fclose (f);
 }
 
+/*
 int main (int argc, char *argv[])
 {
 	int i;
@@ -1625,7 +1623,7 @@ int main (int argc, char *argv[])
 		}
 	}
 
-	/* Preserve the old semantics of -p. */
+	// Preserve the old semantics of -p.
 	if (mode != mode_filter && ignore_components && !strip_components &&
 	    !pat_include && !pat_exclude) {
 		fprintf (stderr,
@@ -1706,4 +1704,5 @@ int main (int argc, char *argv[])
 
 	return 0;
 }
+*/
 

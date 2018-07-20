@@ -97,6 +97,7 @@ getopt_long_only (argc, argv, options, long_options, opt_index)
 
 #include <stdio.h>
 
+/*
 int
 main (argc, argv)
      int argc;
@@ -184,5 +185,6 @@ main (argc, argv)
 
   exit (0);
 }
+*/
 
 #endif /* TEST */
