@@ -1,8 +1,8 @@
 package patchutils
 
 import (
-	"io"
-	"os"
+	"io/ioutil"
+	"reflect"
 	"testing"
 )
 
@@ -12,5 +12,14 @@ func TestCombine(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	io.Copy(os.Stdout, out)
+	b, err := ioutil.ReadAll(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected, err := ioutil.ReadFile("./test/combined.patch")
+
+	if !reflect.DeepEqual(expected, b) {
+		t.Errorf("expected\n%s\ngot\n%s", string(expected), string(b))
+	}
 }

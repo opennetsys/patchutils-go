@@ -1,0 +1,6 @@
+diff -u state.txt state.txt
+--- state.txt	2018-07-19 14:11:09.000000000 -0700
++++ state.txt	2018-07-19 14:18:09.000000000 -0700
+@@ -1 +1 @@
+-hello world
++hi world
