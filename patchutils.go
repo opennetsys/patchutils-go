@@ -15,11 +15,9 @@ import (
 
 // Combine ...
 func Combine(filepathA, filepathB string) (io.Reader, error) {
-
 	fp := C.combine_diff(C.CString(filepathA), C.CString(filepathB))
 
 	filepath := C.GoString(fp)
-
 	if strings.HasPrefix(filepath, "error:") {
 		return nil, errors.New(strings.Replace(filepath, "error: ", "", -1))
 	}

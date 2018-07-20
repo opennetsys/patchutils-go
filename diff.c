@@ -24,22 +24,22 @@
 
 #include <errno.h>
 
-#ifdef HAVE_ERROR_H
+//#ifdef HAVE_ERROR_H
 # include <error.h>
-#endif /* HAVE_ERROR_H */
+//#endif /* HAVE_ERROR_H */
 
 #include <fnmatch.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef HAVE_SYS_TYPES_H
+//#ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h>
-#endif /* HAVE_SYS_TYPES_H */
+//#endif /* HAVE_SYS_TYPES_H */
 
-#ifdef HAVE_UNISTD_H
+//#ifdef HAVE_UNISTD_H
 # include <unistd.h>
-#endif /* HAVE_UNISTD_H */
+//#endif /* HAVE_UNISTD_H */
 
 #include "diff.h"
 #include "util.h"
