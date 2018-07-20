@@ -9,12 +9,12 @@ import (
 func TestCombine(t *testing.T) {
 	out, err := Combine("./test/tmp1.patch", "./test/tmp2.patch")
 	if err != nil {
-		t.Fatal(err)
+		t.Error(err)
 	}
 
 	b, err := ioutil.ReadAll(out)
 	if err != nil {
-		t.Fatal(err)
+		t.Error(err)
 	}
 
 	expected, err := ioutil.ReadFile("./test/combined.patch")
