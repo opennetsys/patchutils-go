@@ -24,9 +24,9 @@
 
 #include <errno.h>
 
-//#ifdef HAVE_ERROR_H
+#ifdef HAVE_ERROR_H
 # include <error.h>
-//#endif /* HAVE_ERROR_H */
+#endif /* HAVE_ERROR_H */
 
 #include <fnmatch.h>
 #include <stdio.h>
