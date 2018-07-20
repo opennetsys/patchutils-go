@@ -2,6 +2,16 @@
 
 > Go bindings for [patchutils](https://github.com/twaugh/patchutils)
 
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/c3systems/go-patchutils/master/LICENSE.md) [![Build Status](https://travis-ci.org/c3systems/go-patchutils.svg?branch=master)](https://travis-ci.org/c3systems/go-patchutils) [![Go Report Card](https://goreportcard.com/badge/github.com/c3systems/go-patchutils?)](https://goreportcard.com/report/github.com/c3systems/go-patchutils) [![GoDoc](https://godoc.org/github.com/c3systems/go-patchutils?status.svg)](https://godoc.org/github.com/c3systems/go-patchutils)
+
+## Install
+
+```bash
+go get -u github.com/c3systems/go-patchutils
+```
+
+## Usage
+
 Currently only supports the `combinediff` command from patchutils.
 
 ```go
@@ -33,4 +43,4 @@ make test
 
 ## License
 
-MIT
+go-patchutils and patchutils are licensed under GNU GPL V2.
