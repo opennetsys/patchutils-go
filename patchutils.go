@@ -3,7 +3,7 @@ package patchutils
 import (
 	"io"
 
-	"github.com/miguelmota/go-patchutils/wrapper"
+	"github.com/c3systems/go-patchutils/wrapper"
 )
 
 // CombineDiff ...
