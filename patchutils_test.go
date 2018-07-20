@@ -6,8 +6,8 @@ import (
 	"testing"
 )
 
-func TestCombine(t *testing.T) {
-	out, err := Combine("./test/tmp1.patch", "./test/tmp2.patch")
+func TestCombineDiff(t *testing.T) {
+	out, err := CombineDiff("./test/tmp1.patch", "./test/tmp2.patch")
 	if err != nil {
 		t.Error(err)
 	}

@@ -12,8 +12,8 @@ import (
 	"strings"
 )
 
-// Combine ...
-func Combine(filepathA, filepathB string) (io.Reader, error) {
+// CombineDiff ...
+func CombineDiff(filepathA, filepathB string) (io.Reader, error) {
 	fp := C.combine_diff(C.CString(filepathA), C.CString(filepathB))
 
 	filepath := C.GoString(fp)

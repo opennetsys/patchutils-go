@@ -6,7 +6,7 @@ import (
 	"github.com/miguelmota/go-patchutils/wrapper"
 )
 
-// Combine ...
-func Combine(filepathA, filepathB string) (io.Reader, error) {
-	return wrapper.Combine(filepathA, filepathB)
+// CombineDiff ...
+func CombineDiff(filepathA, filepathB string) (io.Reader, error) {
+	return wrapper.CombineDiff(filepathA, filepathB)
 }
