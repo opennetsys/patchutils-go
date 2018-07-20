@@ -20,6 +20,10 @@
  *
  */
 
+#ifndef VERSION
+#define VERSION "0.3.4"
+#endif
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -222,7 +226,7 @@ file_matches (void)
 {
 	int f = 0;
 	struct range *r;
-	
+
 	// See if the file range list includes this file.  -1UL is a
 	// wildcard.
 	for (r = files; r; r = r->next)
@@ -1468,7 +1472,7 @@ int main (int argc, char *argv[])
 				     long_options, NULL);
 		if (c == -1)
 			break;
-		
+
 		switch (c) {
 		case 'g':
 			set_grep ();
