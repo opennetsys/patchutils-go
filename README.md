@@ -2,7 +2,7 @@
 
 > Go bindings for [patchutils](https://github.com/twaugh/patchutils)
 
-[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/c3systems/go-patchutils/master/LICENSE.md) [![Build Status](https://travis-ci.org/c3systems/go-patchutils.svg?branch=master)](https://travis-ci.org/c3systems/go-patchutils) [![Go Report Card](https://goreportcard.com/badge/github.com/c3systems/go-patchutils?)](https://goreportcard.com/report/github.com/c3systems/go-patchutils) [![GoDoc](https://godoc.org/github.com/c3systems/go-patchutils?status.svg)](https://godoc.org/github.com/c3systems/go-patchutils)
+[![License](https://img.shields.io/badge/license-GNU%20GPL%20V2-blue.svg)](https://raw.githubusercontent.com/c3systems/go-patchutils/master/LICENSE.md) [![Build Status](https://travis-ci.org/c3systems/go-patchutils.svg?branch=master)](https://travis-ci.org/c3systems/go-patchutils) [![Go Report Card](https://goreportcard.com/badge/github.com/c3systems/go-patchutils?)](https://goreportcard.com/report/github.com/c3systems/go-patchutils) [![GoDoc](https://godoc.org/github.com/c3systems/go-patchutils?status.svg)](https://godoc.org/github.com/c3systems/go-patchutils)
 
 ## Install
 
