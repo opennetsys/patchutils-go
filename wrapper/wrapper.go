@@ -26,5 +26,7 @@ func CombineDiff(filepathA, filepathB string) (io.Reader, error) {
 		return nil, err
 	}
 
+	defer os.Remove(filepath)
+
 	return bufio.NewReader(file), nil
 }
